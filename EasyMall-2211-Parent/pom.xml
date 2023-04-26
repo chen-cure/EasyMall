@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.tedu</groupId>
+    <artifactId>EasyMall-2211-Parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>EasyMall-Product</module>
+        <module>EasyMall-Common</module>
+        <module>EasyMall-Img</module>
+        <module>EasyMall-User</module>
+        <module>EasyMall-Cart</module>
+        <module>EasyMall-Order</module>
+        <module>EasyMall-Search</module>
+        <module>EasyMall-Seckill</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <elasticsearch.version>7.10.2</elasticsearch.version>
+    </properties>
+
+    <!--这样做的好处，以后的所有parent下的子工程全部继承与它-->
+    <parent>
+        <artifactId>spring-boot-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <!--打造成标准的微服务工程-->
+    <dependencyManagement>
+        <dependencies>
+            <!--固定持久层jar包-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.3.0</version>
+            </dependency>
+            <!--数据源-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.1.20</version>
+            </dependency>
+            <!--微服务-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

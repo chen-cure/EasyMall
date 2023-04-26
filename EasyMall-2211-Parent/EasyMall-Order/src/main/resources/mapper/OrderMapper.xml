@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mapper.OrderMapper">
+
+    <insert id="insertOrder">
+        <!--写入主表-->
+        insert into t_order(
+                            order_id,
+                            order_money,
+                            order_receiverinfo,
+                            order_paystate,
+                            order_time,
+                            user_id
+        ) values(
+                 #{orderId},
+                 #{orderMoney},
+                 #{orderReceiverinfo},
+                 #{orderPaystate},
+                 #{orderTime},
+                 #{userId}
+        );
+        <!--从表的写入-->
+        <foreach collection="orderItems" item="oi">
+            insert into t_order_item(
+                                     order_id,
+                                     product_id,
+                                     num,
+                                     product_image,
+                                     product_name,
+                                     product_price
+            ) values(
+                     #{orderId},
+                     #{oi.productId},
+                     #{oi.num},
+                     #{oi.productImage},
+                     #{oi.productName},
+                     #{oi.productPrice}
+            );
+        </foreach>
+    </insert>
+
+    <resultMap id="ORDERMAP" type="com.jt.common.pojo.Order">
+        <!--封装主表信息-->
+        <!---对应实体类order中的属性的名称-->
+        <id property="orderId" column="order_id"></id>
+        <id property="orderMoney" column="order_money"/>
+        <id property="orderPaystate" column="order_money"/>
+        <id property="orderTime" column="order_time"/>
+        <id property="orderPaystate" column="order_paystate"/>
+        <id property="orderReceiverinfo" column="order_receiverinfo"/>
+        <id property="userId" column="user_id"/>
+        <collection property="orderItems" javaType="ArrayList" ofType="orderItem">
+            <id property="id" column="id"/>
+            <id property="orderId" column="order_id"/>
+            <id property="productId" column="product_id"/>
+            <id property="num" column="num"/>
+            <id property="productName" column="product_name"/>
+            <id property="productImage" column="product_image"/>
+            <id property="productPrice" column="product_price"/>
+        </collection>
+
+    </resultMap>
+    <select id="selectByUserId" resultMap="ORDERMAP">
+        select * from t_order o inner join t_order_item oi on
+            o.order_id = oi.order_id where o.user_id=#{userId};
+    </select>
+</mapper>

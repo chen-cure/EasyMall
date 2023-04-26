@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mapper.ProductMapper">
+        <!--查询总数-->
+<!--    <select id="selectProductCount" resultType="java.lang.Integer">-->
+<!--        select count(*) from t_product ;-->
+<!--    </select>-->
+
+    <!--分页查询-->
+<!--    <select id="selectProductByPage" resultType="product">-->
+<!--        select * from t_product limit #{start},#{rows};-->
+<!--    </select>-->
+
+    <!--商品新增-->
+<!--    <insert id="insertProduct">-->
+<!--        insert into t_product values(#{productId},#{productName},#{productPrice},-->
+<!--                                     #{productCategory},#{productImgurl},#{productNum},-->
+<!--                                     #{productDescription});-->
+<!--    </insert>-->
+</mapper>

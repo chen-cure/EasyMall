@@ -52,7 +52,7 @@ public class DirectMode {
     public void consume() throws IOException {
         channel.basicConsume(
                 QUEUE01,
-                false,   //ack需要手动确定
+                false,    // autoACK设置为false，后面需要手动确定ack
                 new DeliverCallback() {
                     @Override
                     public void handle(String consumerTag, Delivery message) throws IOException {

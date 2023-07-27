@@ -49,13 +49,13 @@ public class MqTest {
     public void consume() throws IOException {
         channel.basicConsume(
                 "",
-                false,
+                false,   // autoACK设置为false ，后面需要手动确定ack
                 new DeliverCallback() {
                     @Override
                     public void handle(String consumerTag, Delivery message) throws IOException {
                         byte[] body = message.getBody();
                         System.out.println(body);
-                        channel.basicAck(message.getEnvelope().getDeliveryTag(),false);
+                        channel.basicAck(message.getEnvelope().getDeliveryTag(),false);  //手动确地ack
                     }
                 },
                 new CancelCallback() {

@@ -58,13 +58,13 @@ public class TopicMode {
     public void consume() throws IOException {
         channel.basicConsume(
                 QUEUE1,
-                false,
+                false,   //当autoAck为false时，后面需要手动设置ack确认
                 new DeliverCallback() {
                     @Override
                     public void handle(String consumerTag, Delivery message) throws IOException {
                         byte[] body = message.getBody();
                         System.out.println(new String(body));
-                        channel.basicAck(message.getEnvelope().getDeliveryTag(),false);
+                        channel.basicAck(message.getEnvelope().getDeliveryTag(),false);  //手动设置ack确定
                     }
                 },
                 new CancelCallback() {

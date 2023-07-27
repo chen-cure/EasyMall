@@ -52,13 +52,13 @@ public class DirectMode {
     public void consume() throws IOException {
         channel.basicConsume(
                 QUEUE01,
-                false,
+                false,   //ack需要手动确定
                 new DeliverCallback() {
                     @Override
                     public void handle(String consumerTag, Delivery message) throws IOException {
                         byte[] body = message.getBody();
                         System.out.println(new String(body));
-                        channel.basicAck(message.getEnvelope().getDeliveryTag(),false);
+                        channel.basicAck(message.getEnvelope().getDeliveryTag(),false);  //ack的手工确定
                     }
                 },
                 new CancelCallback() {

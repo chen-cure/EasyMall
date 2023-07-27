@@ -50,7 +50,7 @@ public class SimpleModel {
     public void consumer() throws IOException {
         channel.basicConsume(
                 "simple",
-                false,
+                false,   //当autoAck为false时，需要手动设置ack
                 new DeliverCallback() {
                     @Override
                     public void handle(String consumerTag, Delivery message) throws IOException {
@@ -58,7 +58,7 @@ public class SimpleModel {
                         System.out.println(new String(body));
                         channel.basicAck(
                                 message.getEnvelope().getDeliveryTag(),false
-                        );
+                        );  //手动设置ack
                     }
                 },
                 new CancelCallback() {
